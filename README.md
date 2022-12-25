@@ -33,6 +33,7 @@ python huobi_primebox.py
 + ```Claim(1) or Play(2)``` - if you select ```1```, bot collects all available points. If you select ```2```, bot collects 2 cards from the game ```red packet rain```
 + ```Date(y-m-d)``` - you must enter the current date
   + Example: ```2022-12-31```
++ ```Round number``` - current round number in primebox
 + ```Token``` - enter the ```hb-pro-token``` you copied earlier
 
 ## 📧 Contacts
