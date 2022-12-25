@@ -35,12 +35,11 @@ def play():
         traceid = ''.join([choice('1234567890abcdef') for _ in range(32)])
         response = requests.post(f'https://www.huobi.com/-/x/hbg/v1/prime-box/red-packet-rain/play?x-b3-traceid={traceid}',
                                  json={
-                                     "periodsNum": 1,
+                                     "periodsNum": round,
                                      "redPacketNum": 20
                                  }, headers={'hb-pro-token': token})
-        if str(response.json()['data']['cardNum']) != '2':
-            raise Exception()
-        logger.info('+2 cards')
+        num = str(response.json()['data']['cardNum'])
+        logger.info(f'+{num} cards')
     except:
         raise Exception()
 
@@ -66,6 +65,8 @@ if __name__ == '__main__':
     type = input("Claim(1) or Play(2): ")
     if type == '1':
         date = input("Date(y-m-d): ")
+    else:
+        round = input("Round number: ")
     token = input("Token: ")
     print()
 
