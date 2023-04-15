@@ -16,7 +16,7 @@ def claim():
                                        json={
                                            "taskType": task,
                                            "date": date
-                                       }, headers={'hb-pro-token': token})
+                                       }, headers={'cookie': f'hb-pro-token={token}','hb-pro-token': token})
                 data = (response.json())['data']['resultFlag']
                 if data == 0:
                     task += 1
@@ -26,8 +26,8 @@ def claim():
                 if task == 18:
                     break
                 time.sleep(1)
-    except:
-        raise Exception()
+    except Exception as error:
+        raise Exception(error)
 
 
 def play():
@@ -36,12 +36,12 @@ def play():
         response = requests.post(f'https://www.huobi.com/-/x/hbg/v1/prime-box/red-packet-rain/play?x-b3-traceid={traceid}',
                                  json={
                                      "periodsNum": round,
-                                     "redPacketNum": 20
-                                 }, headers={'hb-pro-token': token})
+                                     "redPacketNum": 25
+                                 },  headers={'cookie': f'hb-pro-token={token}','hb-pro-token': token})
         num = str(response.json()['data']['cardNum'])
         logger.info(f'+{num} cards')
-    except:
-        raise Exception()
+    except Exception as error:
+        raise Exception(error)
 
 
 def main():
@@ -50,11 +50,11 @@ def main():
             claim()
         else:
             play()
-    except:
-        logger.error('Error')
-        input()
+    except Exception as error:
+        logger.error(error)
     else:
-        logger.info('Successfully')
+        logger.success('Successfully')
+    finally:
         input()
 
 
@@ -62,12 +62,12 @@ if __name__ == '__main__':
 
     print("Bot Huobi primebox @flamingoat\n")
 
-    type = input("Claim(1) or Play(2): ")
-    if type == '1':
-        date = input("Date(y-m-d): ")
-    else:
-        round = input("Round number: ")
-    token = input("Token: ")
-    print()
+    while True:
+        type = input("Claim(1) or Play(2): ")
+        if type == '1':
+            date = input("Date(y-m-d): ")
+        else:
+            round = input("Round number: ")
+        token = input("Token: ")
 
-    main()
+        main()
